@@ -7,10 +7,12 @@ Every module that needs a DB session uses the `get_db` dependency.
 from sqlalchemy import create_engine
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-DATABASE_URL = "sqlite:///./task_management.db"
+from app.core.config import get_settings
+
+settings = get_settings()
 
 engine = create_engine(
-    DATABASE_URL,
+    settings.DATABASE_URL,
     connect_args={"check_same_thread": False},  # Required for SQLite
     echo=False,
 )
